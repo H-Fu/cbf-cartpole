@@ -74,8 +74,8 @@ def control_safe(x):
     q = np.array([-u_nom])
 
     term = 1/m * (T_h + (x[1] - v_0) / (c_d*g))
-    _g = np.array([term])
-    _h = np.array([term*F_r(x[1]) + (v_0 - x[1]) + alpha*h(x)])
+    _g = np.array([term])  # A_{cbf}
+    _h = np.array([term*F_r(x[1]) + (v_0 - x[1]) + alpha*h(x)])  # b_{cbf}, B(x) = 1/(alpha * h(x))
 
     u_filtered = solve_qp(p, q, _g, _h,
         solver="cvxopt")
